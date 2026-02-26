@@ -1,4 +1,3 @@
-### tkinter login### 
 import tkinter
 from tkinter import messagebox
 import main_guy
@@ -21,7 +20,8 @@ def login():
 
     # Admin check
     if username == "admin" and password == admin_password:
-        messagebox.showinfo("Login Success", "Admin logged in.")
+        window.destroy()
+        main_guy.main_window()
 
     # Student check (any name but same password)
     elif username != "admin" and password == student_password:
