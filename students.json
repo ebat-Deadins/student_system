@@ -1,1 +1,82 @@
-
+{
+    "students": [
+        {
+            "name": "Irmuun",
+            "id": "V.IT24C001",
+            "math": 100,
+            "lecture": 88
+        },
+        {
+            "name": "chinhusel",
+            "id": "V.IT24C002",
+            "math": 28,
+            "lecture": 11
+        },
+        {
+            "name": "dulguun-undral",
+            "id": "V.IT24C003",
+            "math": 22,
+            "lecture": 33
+        },
+        {
+            "name": "sodbileg",
+            "id": "V.IT24C004",
+            "math": 55,
+            "lecture": 44
+        },
+        {
+            "name": "batbileg",
+            "id": "V.IT24C005",
+            "math": 73,
+            "lecture": 12
+        },
+        {
+            "name": "miniinin",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "afafaf",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "minini",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "afaf",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "afafaf",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "asdfsadfasdf",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "onoooooo",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        },
+        {
+            "name": "zazaza",
+            "id": "0",
+            "math": "0",
+            "lecture": "0"
+        }
+    ]
+}
