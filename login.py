@@ -24,19 +24,25 @@ def login():
         messagebox.showerror("Error", "Please fill all fields.")
         return
 
-    if username == "admin" and password == "admin999":
-        messagebox.showinfo("Login Success", "Admin logged in.")
-        window.withdraw()
-        main_gui.main_window(role="admin")
+    try:
+        with open("users.json", "r") as f:
+            data = json.load(f)
+            users = data["users"]
+    except (FileNotFoundError, json.JSONDecodeError):
+        messagebox.showerror("Error", "Users database not found or invalid.")
+        return
 
-    elif username != "admin" and password == "12345":
-        messagebox.showinfo("Login Success", f"Student {username} logged in.")
+    # Find user in array
+    user = next((u for u in users if u["name"] == username), None)
+
+    if user and user["password"] == password:
+        role = user.get("role", "student")
+        messagebox.showinfo("Login Success", f"{role.capitalize()} {username} logged in.")
         save_logged_student(username)
         window.withdraw()
-        main_gui.main_window(role="student", username=username)
-
+        main_gui.main_window(role=role, username=username)
     else:
-        messagebox.showerror("Error", "Invalid login.")
+        messagebox.showerror("Error", "Invalid username or password.")
 
 # ------------------ UI ------------------
 window = tk.Tk()
