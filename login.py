@@ -1,64 +1,96 @@
 import tkinter
 from tkinter import messagebox
 import main_guy
-
-window = tkinter.Tk()
-window.title("Login form")
-window.geometry('340x440')
-window.configure(bg='#333333')
+import json
 
 
-# 🔹 USERS
-student_password = "12345"   # all students use this
-admin_password = "admin999"  # admin uses different password
+# ----------------------------
+# Save logged student
+# ----------------------------
+def save_logged_student(username):
+    try:
+        with open("logged_students.json", "r") as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        data = []
+
+    if username not in data:
+        data.append(username)
+
+    with open("logged_students.json", "w") as f:
+        json.dump(data, f, indent=4)
 
 
-# 🔹 Login function
+# ----------------------------
+# Login Function
+# ----------------------------
 def login():
-    username = username_entry.get()
-    password = password_entry.get()
+    username = username_entry.get().strip()
+    password = password_entry.get().strip()
 
-    # Admin check
-    if username == "admin" and password == admin_password:
-        window.destroy()
-        main_guy.main_window()
+    if not username or not password:
+        messagebox.showerror("Error", "Please fill all fields.")
+        return
 
-    # Student check (any name but same password)
-    elif username != "admin" and password == student_password:
+    # Admin
+    if username == "admin" and password == "admin999":
+        messagebox.showinfo("Login Success", "Admin logged in.")
+        window.withdraw()
+        main_guy.main_window(window, role="admin", username=username)
+
+    # Student
+    elif username != "admin" and password == "12345":
         messagebox.showinfo("Login Success", f"Student {username} logged in.")
+        save_logged_student(username)
+        window.withdraw()
+        main_guy.main_window(window, role="student", username=username)
 
     else:
         messagebox.showerror("Error", "Invalid login.")
 
 
-frame = tkinter.Frame(bg='#333333')
+# ----------------------------
+# UI Setup
+# ----------------------------
+window = tkinter.Tk()
+window.title("Login Form")
+window.geometry('340x440')
+window.configure(bg='#333333')
 
-# Widgets
-login_label = tkinter.Label(
-    frame, text="Login", bg='#333333', fg="#FF3399", font=("Arial", 30))
+frame = tkinter.Frame(window, bg='#333333')
+frame.pack(pady=50)
 
-username_label = tkinter.Label(
-    frame, text="Username", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+tkinter.Label(
+    frame, text="Login",
+    bg='#333333', fg="#FF3399",
+    font=("Arial", 30)
+).grid(row=0, column=0, columnspan=2, pady=30)
+
+tkinter.Label(
+    frame, text="Username",
+    bg='#333333', fg="#FFFFFF",
+    font=("Arial", 16)
+).grid(row=1, column=0)
 
 username_entry = tkinter.Entry(frame, font=("Arial", 16))
+username_entry.grid(row=1, column=1, pady=15)
 
-password_label = tkinter.Label(
-    frame, text="Password", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+tkinter.Label(
+    frame, text="Password",
+    bg='#333333', fg="#FFFFFF",
+    font=("Arial", 16)
+).grid(row=2, column=0)
 
 password_entry = tkinter.Entry(frame, show="*", font=("Arial", 16))
+password_entry.grid(row=2, column=1, pady=15)
 
-login_button = tkinter.Button(
-    frame, text="Login", bg="#FF3399", fg="#FFFFFF",
-    font=("Arial", 16), command=login)
+tkinter.Button(
+    frame,
+    text="Login",
+    bg="#FF3399",
+    fg="#FFFFFF",
+    font=("Arial", 16),
+    command=login
+).grid(row=3, column=0, columnspan=2, pady=30)
 
-
-# Layout
-login_label.grid(row=0, column=0, columnspan=2, pady=40)
-username_label.grid(row=1, column=0)
-username_entry.grid(row=1, column=1, pady=20)
-password_label.grid(row=2, column=0)
-password_entry.grid(row=2, column=1, pady=20)
-login_button.grid(row=3, column=0, columnspan=2, pady=30)
-
-frame.pack()
 window.mainloop()
