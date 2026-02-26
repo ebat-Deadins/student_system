@@ -36,7 +36,7 @@ def login():
     if username == "admin" and password == "admin999":
         messagebox.showinfo("Login Success", "Admin logged in.")
         window.withdraw()
-        main_guy.main_window(window, role="admin", username=username)
+        main_guy.main_window()
 
     # Student
     elif username != "admin" and password == "12345":
@@ -47,7 +47,6 @@ def login():
 
     else:
         messagebox.showerror("Error", "Invalid login.")
-
 
 # ----------------------------
 # UI Setup
