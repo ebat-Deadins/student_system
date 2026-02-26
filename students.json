@@ -4,79 +4,106 @@
             "name": "Irmuun",
             "id": "V.IT24C001",
             "math": 100,
-            "lecture": 88
+            "lecture": 88,
+            "pe": "99",
+            "english": 66,
+            "chemistry": 55,
+            "programming": 44,
+            "web_design": 33,
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         },
         {
-            "name": "chinhusel",
+            "name": "Chinhusel",
             "id": "V.IT24C002",
             "math": 28,
-            "lecture": 11
+            "lecture": 11,
+            "pe": 22,
+            "english": 33,
+            "chemistry": 44,
+            "programming": 55,
+            "web_design": 66,
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         },
         {
-            "name": "dulguun-undral",
+            "name": "Dulguun-undral",
             "id": "V.IT24C003",
             "math": 22,
-            "lecture": 33
+            "lecture": 33,
+            "pe": 44,
+            "english": 55,
+            "chemistry": 66,
+            "programming": 77,
+            "web_design": 88,
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         },
         {
-            "name": "sodbileg",
+            "name": "Sodbileg",
             "id": "V.IT24C004",
             "math": 55,
-            "lecture": 44
+            "lecture": 44,
+            "pe": 33,
+            "english": 22,
+            "chemistry": 11,
+            "programming": 55,
+            "web_design": 44,
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         },
         {
-            "name": "batbileg",
+            "name": "Batbileg",
             "id": "V.IT24C005",
             "math": 73,
-            "lecture": 12
+            "lecture": 12,
+            "pe": 34,
+            "english": 56,
+            "chemistry": 78,
+            "programming": 90,
+            "web_design": 80,
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         },
         {
             "name": "miniinin",
-            "id": "0",
+            "id": "100",
             "math": "0",
-            "lecture": "0"
+            "lecture": 10.0,
+            "pe": "100",
+            "english": "0",
+            "chemistry": 10.0,
+            "programming": "0",
+            "web_design": "0",
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         },
         {
-            "name": "afafaf",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
-        },
-        {
-            "name": "minini",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
-        },
-        {
-            "name": "afaf",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
-        },
-        {
-            "name": "afafaf",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
-        },
-        {
-            "name": "asdfsadfasdf",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
-        },
-        {
-            "name": "onoooooo",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
-        },
-        {
-            "name": "zazaza",
-            "id": "0",
-            "math": "0",
-            "lecture": "0"
+            "name": "Bolor",
+            "id": "101",
+            "math": 0,
+            "lecture": 0,
+            "pe": 0,
+            "english": 0,
+            "chemistry": 0,
+            "programming": 0,
+            "web_design": 0,
+            "average": 0,
+            "min": 0,
+            "max": 0,
+            "gpa": 0
         }
     ]
 }
