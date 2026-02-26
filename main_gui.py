@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 import json
-import data_manager
+import data_manager  # your file managing students.json updates
 
-def main_window():
-    global main_win , tree
-    main_win = tk.Tk()
+def main_window(role="admin", username=""):
+    global main_win, tree
+    main_win = tk.Toplevel()  # use Toplevel instead of Tk
     main_win.title("Main Window")
-    main_win.geometry("400x300")
+    main_win.geometry("500x400")
     main_win.configure(bg="#333333")
 
     # Center window
@@ -24,71 +24,59 @@ def main_window():
     with open("students.json", "r") as file:
         data = json.load(file)
 
-    columns = ("Name", "ID", "Math", "Lecture")
+    columns = ("ID", "Name", "Math", "Lecture")
     tree = ttk.Treeview(main_win, columns=columns, show="headings")
 
     for col in columns:
         tree.heading(col, text=col)
-        tree.column(col, width=30)
+        tree.column(col, width=100)
 
     for student in data["students"]:
-        tree.insert("", tk.END, values=( #"" n root level is empty string, tk.END means insert at the end of the tree
-            student["name"],
+        # For students, show only their row
+        if role == "student" and student["name"] != username:
+            continue
+        tree.insert("", tk.END, values=(
             student["id"],
-            student["math"],
-            student["lecture"]
-        ) )
+            student["name"],
+            student.get("math", ""),
+            student.get("lecture", "")
+        ))
 
-    tree.pack(fill="both", expand=True) # fill both means it will expand in both directions, expand true means it will take all available space
+    tree.pack(fill="both", expand=True, pady=10)
 
-    tree.bind("<Double-1>", lambda event: edit_cell(event)) # bind double click to edit cell
+    if role == "admin":
+        # Admin can add students
+        entry_name = tk.Entry(main_win)
+        entry_name.pack(pady=5)
+        tk.Button(main_win, text="Add Student", bg="#FF3399", fg="#FFF",
+                  command=lambda: add_student(entry_name.get())).pack(pady=5)
 
-
-
-
-
-
-
-    entry = tk.Entry(main_win)
-    entry.pack(pady=5)
-
-    add_btn = tk.Button(
-        main_win,
-        text="Add Student",
-        command=lambda: add_student(entry.get())
-    )
-    add_btn.pack()
-
-    main_win.mainloop()
+        # Admin can edit grades
+        tree.bind("<Double-1>", lambda event: edit_cell(event))
 
 def edit_cell(event):
-    selected_item = tree.focus() # focus returns the id of the selected item
-    column = tree.identify_column(event.x) # identify_column returns the column number of the clicked cell
-    row = tree.identify_row(event.y) # identify_row returns the row id of the clicked cell
+    selected_item = tree.focus()
+    column = tree.identify_column(event.x)
+    row = tree.identify_row(event.y)
     if not selected_item or not column or not row:
-        return # if no item is selected or no column is identified or no row is identified, return
-    x, y, width, height = tree.bbox(selected_item, column) # bbox returns the bounding box of the cell
-    
-    value = tree.set(selected_item, column) # set returns the value of the cell
-    entry = tk.Entry(main_win) # create an entry widget
-    entry.place(x=x, y=y, width=width, height=height) # place the entry widget on top of the cell
-    entry.insert(0, value) # insert the current value of the cell into the entry
-    entry.focus() # focus the entry widget
-    entry.bind("<Return>", lambda e: save_edit(selected_item, column, entry.get())) # bind the return key to save the edit
-    entry.bind("<FocusOut>", lambda e: entry.destroy()) # bind focus out to destroy
+        return
+    x, y, width, height = tree.bbox(selected_item, column)
+    value = tree.set(selected_item, column)
+    entry = tk.Entry(main_win)
+    entry.place(x=x, y=y, width=width, height=height)
+    entry.insert(0, value)
+    entry.focus()
+    entry.bind("<Return>", lambda e: save_edit(selected_item, column, entry.get()))
+    entry.bind("<FocusOut>", lambda e: entry.destroy())
+
 def save_edit(selected_item, column, new_value):
-    # Get real student ID from tree values
     values = tree.item(selected_item)["values"]
-    student_id = str(values[1])  # ID column
-    # Update Treeview
+    student_id = str(values[0])  # ID column
     tree.set(selected_item, column, new_value)
-    # Update JSON correctly
     data_manager.update_student(student_id, column, new_value)
-    main_win.focus() # return focus to main window after editing
+    main_win.focus()
+
 def add_student(name):
     data_manager.add_student_1(name)
     main_win.destroy()
-    main_window()
-
-
-main_window()
+    main_window(role="admin")
