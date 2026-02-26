@@ -29,7 +29,7 @@ def main_window():
 
     for col in columns:
         tree.heading(col, text=col)
-        tree.column(col, width=90)
+        tree.column(col, width=30)
 
     for student in data["students"]:
         tree.insert("", tk.END, values=(
