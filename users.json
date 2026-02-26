@@ -1,1 +1,19 @@
-
+{
+  "users": [
+    {
+      "name": "admin",
+      "password": "admin999",
+      "role": "admin"
+    },
+    {
+      "name": "V.IT24C001",
+      "password": "pass001",
+      "role": "student"
+    },
+    {
+      "name": "V.IT24C002",
+      "password": "pass002",
+      "role": "student"
+    }
+  ]
+}
