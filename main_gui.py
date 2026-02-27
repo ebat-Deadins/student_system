@@ -7,7 +7,7 @@ def main_window():
     global main_win , tree, columns
     main_win = tk.Tk()
     main_win.title("Main Window")
-    main_win.geometry("400x300")
+    main_win.geometry("1000x700")
     main_win.configure(bg="#333333")
     main_win.update()
     w = main_win.winfo_width()
