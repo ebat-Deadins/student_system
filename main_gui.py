@@ -40,7 +40,7 @@ def main_window():
         command=lambda: add_student(entry.get())
     )
     add_btn.pack()
-    refresh_tree()
+    refresh_student()
     main_win.mainloop()
 def student_window(username):
     global tree
@@ -88,6 +88,7 @@ def student_window(username):
                 student["gpa"]
             ))
     tree.pack(fill="both", expand=True) # fill both means it will expand in both directions, expand true means it will take all available space
+    refresh_student_tree(username)
     student_win.mainloop()
 def edit_cell(event):
     selected_item = tree.focus() # focus returns the id of the selected item
@@ -111,12 +112,12 @@ def save_edit(selected_item, column, new_value):
     if column_name in ("average", "min", "max", "gpa"):
         return
     data_manager.update_student(student_id, column_name, new_value)
-    refresh_tree()
+    refresh_student_tree(values[0]) # refresh the student window for the updated student
 def add_student(name):
     data_manager.add_student(name)
     main_win.destroy()
     main_window()
-def refresh_tree():
+def refresh_student():
     global tree
     for item in tree.get_children():
         tree.delete(item)
@@ -138,4 +139,29 @@ def refresh_tree():
             maximum,
             gpa
         ]
-        tree.insert("", tk.END, values=values)
+    tree.insert("", tk.END, values=values)
+def refresh_student_tree(username):
+    global tree
+    for item in tree.get_children():
+        tree.delete(item)
+    students = data_manager.get_all_students()
+    for student in students:
+        if student["name"] == username:
+            avg, minimum, maximum, gpa = data_manager.calculate_stats(student)
+            values = [
+                student.get("name",""),
+                student.get("id",""),
+                student.get("math",""),
+                student.get("lecture",""),
+                student.get("pe",""),
+                student.get("english",""),
+                student.get("chemistry",""),
+                student.get("programming",""),
+                student.get("web_design",""),
+                avg,
+                minimum,
+                maximum,
+                gpa
+            ]
+            tree.insert("", tk.END, values=values)
+student_window("Dulguun-undral")
