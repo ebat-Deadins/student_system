@@ -72,11 +72,6 @@ def update_student(student_id, column_name, new_value):
 def get_all_students():
     return load_data()["students"]
 
-def get_student_by_name(name):
-    for s in get_all_students():
-        if s["name"] == name:
-            return s
-    return None
 
 def calculate_stats(student):
     subjects = ["math","lecture","pe","english","chemistry","programming","web_design"]
