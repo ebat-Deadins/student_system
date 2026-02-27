@@ -139,7 +139,7 @@ def refresh_student():
             maximum,
             gpa
         ]
-    tree.insert("", tk.END, values=values)
+        tree.insert("", tk.END, values=values)
 def refresh_student_tree(username):
     global tree
     for item in tree.get_children():
