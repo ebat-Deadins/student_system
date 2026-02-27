@@ -46,7 +46,7 @@ def student_window(username):
     global tree
     student_win = tk.Tk()
     student_win.title(f"{username}'s Dashboard")
-    student_win.geometry("400x300")
+    student_win.geometry("1400x800")
     student_win.configure(bg="#333333")
     student_win.update()
     w = student_win.winfo_width()
