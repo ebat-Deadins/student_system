@@ -112,7 +112,7 @@ def save_edit(selected_item, column, new_value):
     if column_name in ("average", "min", "max", "gpa"):
         return
     data_manager.update_student(student_id, column_name, new_value)
-    refresh_student_tree(values[0]) # refresh the student window for the updated student
+    refresh_student()
 def add_student(name):
     data_manager.add_student(name)
     main_win.destroy()
@@ -164,4 +164,4 @@ def refresh_student_tree(username):
                 gpa
             ]
             tree.insert("", tk.END, values=values)
-student_window("Dulguun-undral")
+main_window()
